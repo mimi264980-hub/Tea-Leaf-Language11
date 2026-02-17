@@ -25,12 +25,16 @@
             background-attachment: fixed;
             color: var(--cream);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; padding: 0;
-            display: flex; flex-direction: column; align-items: center;
-            min-height: 100vh; overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- UI Components --- */
+        /* --- Settings & Switch Styles --- */
         .switch { position: relative; display: inline-block; width: 46px; height: 22px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
@@ -38,31 +42,94 @@
         input:checked + .slider { background-color: var(--maroon); }
         input:checked + .slider:before { transform: translateX(24px); }
 
+        /* --- Updated Note Modal Styles (Rich Text Support) --- */
         #note-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); z-index: 10001; justify-content: center; align-items: center;
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10001;
+            justify-content: center; align-items: center;
         }
-        .note-box { background: var(--cream); padding: 20px; border-radius: 25px; width: 85%; max-width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .note-toolbar { display: flex; gap: 8px; margin-bottom: 10px; background: #eee; padding: 8px; border-radius: 12px; justify-content: center; }
-        .tool-btn { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-weight: bold; color: var(--maroon); font-size: 14px; }
-        .note-area { width: 100%; height: 180px; border: 2px solid #eee; border-radius: 15px; padding: 12px; margin-bottom: 15px; box-sizing: border-box; overflow-y: auto; background: white; color: #333; outline: none; font-size: 1rem; }
+        .note-box {
+            background: var(--cream);
+            padding: 20px;
+            border-radius: 25px;
+            width: 85%;
+            max-width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .note-toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            background: #eee;
+            padding: 8px;
+            border-radius: 12px;
+            justify-content: center;
+        }
+        .tool-btn {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--maroon);
+            font-size: 14px;
+        }
+        .note-area {
+            width: 100%;
+            height: 180px;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 12px;
+            font-family: inherit;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            background: white;
+            color: #333;
+            text-align: left;
+            outline: none;
+            font-size: 1rem;
+        }
 
+        /* --- Floating Draggable Note Button --- */
         #floating-note-btn {
-            position: fixed; bottom: 90px; right: 20px;
-            background: var(--gold); width: 65px; height: 65px; border-radius: 50%;
-            border: 3px solid var(--cream); box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            display: flex; justify-content: center; align-items: center;
-            cursor: grab; z-index: 999; touch-action: none; /* တားဆီးရန် */
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: var(--gold);
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: 3px solid var(--cream);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+            z-index: 999;
+            touch-action: none;
         }
 
         #splash-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, var(--maroon), #2a0303);
             display: flex; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
+
+        .splash-content { text-align: center; }
+        .logo-wrapper { width: 120px; height: 120px; margin: 0 auto 20px; animation: pulse 2s infinite ease-in-out; }
+        .splash-logo { width: 100%; filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4)); }
+        .app-name { color: var(--gold); font-size: 2.2rem; letter-spacing: 4px; margin: 10px 0 5px; font-weight: 900; }
         .loader { width: 150px; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; margin: 20px auto 0; overflow: hidden; }
         .loader-bar { width: 0%; height: 100%; background: var(--gold); animation: loading 2.5s forwards ease-in-out; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes loading { 0% { width: 0%; } 100% { width: 100%; } }
         .fade-out { opacity: 0; visibility: hidden; }
 
@@ -89,6 +156,7 @@
         .btn-mic { background: var(--maroon); color: white; box-shadow: 0 4px 10px rgba(110, 13, 13, 0.3); }
 
         .level-section { width: 85%; max-width: 380px; margin-bottom: 100px; }
+        .level-info { display: flex; justify-content: space-between; color: var(--gold); font-size: 0.85rem; margin-bottom: 8px; }
         .progress-bg { height: 12px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); }
         .progress-fill { width: 45%; height: 100%; background: linear-gradient(90deg, var(--gold), #ffdf80); }
 
@@ -102,7 +170,7 @@
 <body>
 
     <div id="settings-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; justify-content:center; align-items:center;">
-        <div style="background:var(--cream); color:var(--maroon); padding:25px; border-radius:25px; width:80%; max-width:300px; text-align:center;">
+        <div style="background:var(--cream); color:var(--maroon); padding:25px; border-radius:25px; width:80%; max-width:300px; text-align:center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
             <h3 style="margin-top:0;">ဆက်တင်များ</h3>
             <div style="display:flex; justify-content:space-between; align-items:center; margin:25px 0; font-weight: bold;">
                 <span>တုန်ခါမှု (Vibration)</span>
@@ -118,13 +186,16 @@
     <div id="note-modal">
         <div class="note-box">
             <h3 style="color:var(--maroon); margin-top:0;">မှတ်စု (Notes)</h3>
+            
             <div class="note-toolbar">
                 <button class="tool-btn" onclick="formatText('bold')">B</button>
                 <button class="tool-btn" onclick="formatText('italic')" style="font-style: italic;">I</button>
                 <button class="tool-btn" onclick="formatText('backColor', 'yellow')">🖌️</button>
                 <button class="tool-btn" onclick="formatText('foreColor', '#6e0d0d')">🎨</button>
             </div>
-            <div id="note-input" class="note-area" contenteditable="true"></div>
+
+            <div id="note-input" class="note-area" contenteditable="true" placeholder="ဒီနေရာမှာ မှတ်သားပါ..."></div>
+
             <div style="display:flex; gap:10px;">
                 <button onclick="saveNote()" style="flex:1; background:var(--maroon); color:white; border:none; padding:12px; border-radius:12px; cursor:pointer; font-weight:bold;">သိမ်းမည်</button>
                 <button onclick="toggleNote()" style="flex:1; background:#ccc; border:none; padding:12px; border-radius:12px; cursor:pointer; font-weight:bold;">ပိတ်မည်</button>
@@ -133,12 +204,16 @@
     </div>
 
     <div id="splash-screen">
-        <div style="text-align: center;">
-            <svg viewBox="0 0 100 100" style="width:120px; height:120px; margin-bottom: 20px;">
-                <path d="M50 90 C 20 90, 5 50, 50 10 C 95 50, 80 90, 50 90" fill="#4F7942"/>
-                <path d="M50 90 L 50 15" stroke="#d4af37" stroke-width="3" fill="none"/>
-            </svg>
-            <h1 style="color:var(--gold); letter-spacing:4px; margin:0;">TEA LEAF</h1>
+        <div class="splash-content">
+            <div class="logo-wrapper">
+                <svg viewBox="0 0 100 100" class="splash-logo">
+                    <path d="M50 90 C 20 90, 5 50, 50 10 C 95 50, 80 90, 50 90" fill="#4F7942"/>
+                    <path d="M50 90 L 50 15" stroke="#d4af37" stroke-width="3" fill="none"/>
+                    <path d="M50 45 L 75 30 M 50 60 L 25 45 M 50 75 L 70 65" stroke="#d4af37" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <h1 class="app-name">TEA LEAF</h1>
+            <p style="color: var(--cream); opacity: 0.8;">Ta'ang Language App</p>
             <div class="loader"><div class="loader-bar"></div></div>
         </div>
     </div>
@@ -151,14 +226,18 @@
 
     <div class="streak-container">
         <div class="streak-number">၅</div>
-        <div class="leaf-svg l1"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/></svg></div>
-        <div class="leaf-svg l2"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/></svg></div>
-        <div class="leaf-svg l3"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/></svg></div>
-        <div class="leaf-svg l4"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/></svg></div>
-        <div class="leaf-svg l5"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/></svg></div>
+        <div class="leaf-svg l1"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/><path d="M50 80 L 50 25" stroke="#3e5f34" stroke-width="2" fill="none"/></svg></div>
+        <div class="leaf-svg l2"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/><path d="M50 80 L 50 25" stroke="#3e5f34" stroke-width="2" fill="none"/></svg></div>
+        <div class="leaf-svg l3"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/><path d="M50 80 L 50 25" stroke="#3e5f34" stroke-width="2" fill="none"/></svg></div>
+        <div class="leaf-svg l4"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/><path d="M50 80 L 50 25" stroke="#3e5f34" stroke-width="2" fill="none"/></svg></div>
+        <div class="leaf-svg l5"><svg viewBox="0 0 100 100"><path d="M50 80 C 20 80, 10 50, 50 20 C 90 50, 80 80, 50 80" fill="#4F7942"/><path d="M50 80 L 50 25" stroke="#3e5f34" stroke-width="2" fill="none"/></svg></div>
     </div>
+    <p style="color: var(--gold); margin-top: -10px; margin-bottom: 25px;">လက်ဖက်ညွန့် ၅ ညွန့် ရှင်သန်နေပြီ</p>
 
     <div class="card">
+        <div style="width: 100%; height: 160px; background: #eee; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #ccc;">
+            <span class="material-icons-round" style="font-size: 50px;">image</span>
+        </div>
         <h1 class="word-main">ရိုဆေ</h1>
         <p class="word-sub">Ro Say (မင်္ဂလာပါ)</p>
         <div class="action-btns">
@@ -168,6 +247,7 @@
     </div>
 
     <div class="level-section">
+        <div class="level-info"><span>Tea Picker</span><span>Village Elder</span></div>
         <div class="progress-bg"><div class="progress-fill"></div></div>
     </div>
 
@@ -187,113 +267,111 @@
     </nav>
 
     <script>
-        let isDragging = false; // Dragging state ကို အပြင်မှာ ကြေညာထားပါ
-
-        // ၁။ Vibration & Audio Feedbacks
+        // ၁။ Vibration Control Utility
         function hapticFeedback() {
             const vibrationEnabled = document.getElementById('vibration-toggle').checked;
-            if (vibrationEnabled && navigator.vibrate) navigator.vibrate(40);
+            if (vibrationEnabled && navigator.vibrate) {
+                navigator.vibrate(40);
+            }
         }
 
-        // ၂။ Modals Toggles
+        // ၂။ Toggle Settings Modal
         function toggleSettings() {
             const modal = document.getElementById('settings-modal');
             modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'flex' : 'none';
         }
 
+        // ၃။ Rich Text Formatting
+        function formatText(command, value = null) {
+            document.execCommand(command, false, value);
+            hapticFeedback();
+        }
+
+        // ၄။ Note Functions
         function toggleNote() {
             const modal = document.getElementById('note-modal');
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
             if(modal.style.display === 'flex') hapticFeedback();
         }
 
-        // ၃။ Note Rich Text & Save
-        function formatText(command, value = null) {
-            document.execCommand(command, false, value);
-            hapticFeedback();
-        }
-
         function saveNote() {
             const noteContent = document.getElementById('note-input').innerHTML;
             localStorage.setItem('taang_rich_note', noteContent);
             hapticFeedback();
-            alert('မှတ်စုကို သိမ်းဆည်းလိုက်ပါပြီ။');
+            alert('မှတ်စုကို ပုံစံချပြီး သိမ်းဆည်းလိုက်ပါပြီ။');
             toggleNote();
         }
 
-        // ၄။ အဆင့်မြင့် Draggable Logic (Mouse + Touch)
-        function makeDraggable(element) {
-            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        // ၅။ Draggable Logic for Floating Button (နဂို Code ကို Mouse အတွက်ပါ ဖြည့်စွက်ထားသည်)
+        const noteBtn = document.getElementById('floating-note-btn');
+        let isDragging = false;
+
+        // Mouse နဲ့ Touch နှစ်မျိုးလုံးအတွက် Event Function
+        const moveHandler = (e) => {
+            isDragging = true;
+            let clientX, clientY;
             
-            element.onmousedown = dragStart;
-            element.ontouchstart = dragStart;
-
-            function dragStart(e) {
-                isDragging = false;
-                const event = e.touches ? e.touches[0] : e;
-                pos3 = event.clientX;
-                pos4 = event.clientY;
-                
-                document.onmouseup = dragEnd;
-                document.ontouchend = dragEnd;
-                document.onmousemove = dragMove;
-                document.ontouchmove = dragMove;
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
             }
+            
+            const btnSize = 65;
+            const margin = 10;
+            const maxX = window.innerWidth - btnSize - margin;
+            const maxY = window.innerHeight - btnSize - 80;
 
-            function dragMove(e) {
-                isDragging = true;
-                const event = e.touches ? e.touches[0] : e;
-                pos1 = pos3 - event.clientX;
-                pos2 = pos4 - event.clientY;
-                pos3 = event.clientX;
-                pos4 = event.clientY;
+            let newX = clientX - 32;
+            let newY = clientY - 32;
 
-                let newTop = element.offsetTop - pos2;
-                let newLeft = element.offsetLeft - pos1;
+            if (newX < margin) newX = margin;
+            if (newX > maxX) newX = maxX;
+            if (newY < margin) newY = margin;
+            if (newY > maxY) newY = maxY;
 
-                // Screen Boundary Check
-                const margin = 10;
-                if (newTop < margin) newTop = margin;
-                if (newLeft < margin) newLeft = margin;
-                if (newTop > window.innerHeight - 150) newTop = window.innerHeight - 150;
-                if (newLeft > window.innerWidth - 75) newLeft = window.innerWidth - 75;
+            noteBtn.style.left = newX + 'px';
+            noteBtn.style.top = newY + 'px';
+            noteBtn.style.right = 'auto';
+            noteBtn.style.bottom = 'auto';
+            
+            if (e.cancelable) e.preventDefault();
+        };
 
-                element.style.top = newTop + "px";
-                element.style.left = newLeft + "px";
-                element.style.right = "auto";
-                element.style.bottom = "auto";
-            }
+        // Touch Events
+        noteBtn.addEventListener('touchstart', () => { isDragging = false; });
+        noteBtn.addEventListener('touchmove', moveHandler, { passive: false });
+        noteBtn.addEventListener('touchend', () => { if (!isDragging) toggleNote(); });
 
-            function dragEnd() {
-                document.onmouseup = null;
-                document.ontouchend = null;
-                document.onmousemove = null;
-                document.ontouchmove = null;
-            }
-        }
+        // Mouse Events (Desktop အတွက် ဖြည့်စွက်ချက်)
+        noteBtn.addEventListener('mousedown', (e) => {
+            isDragging = false;
+            document.addEventListener('mousemove', moveHandler);
+            document.addEventListener('mouseup', () => {
+                document.removeEventListener('mousemove', moveHandler);
+                // Mouse လွှတ်လိုက်ချိန်မှာ Drag မလုပ်ခဲ့ရင် Note ကိုဖွင့်ပေးမယ်
+                if (!isDragging) { /* Click event က handle လုပ်ပါလိမ့်မယ် */ }
+            }, { once: true });
+        });
+        
+        noteBtn.addEventListener('click', () => {
+            if (!isDragging) toggleNote();
+        });
 
-        // ၅။ App Initialization
+        // ၆။ App Initialization & Splash Screen
         window.addEventListener('load', () => {
-            const noteBtn = document.getElementById('floating-note-btn');
-            makeDraggable(noteBtn);
-
-            // ခလုတ်နှိပ်တာလား ရွှေ့တာလား ခွဲခြားခြင်း
-            noteBtn.addEventListener('click', () => {
-                if (!isDragging) toggleNote();
-            });
-
-            // Load saved note
             const savedNote = localStorage.getItem('taang_rich_note');
             if(savedNote) document.getElementById('note-input').innerHTML = savedNote;
 
-            // Splash Screen Hide
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
                 if(splash) splash.classList.add('fade-out');
-            }, 2500);
+            }, 3000);
         });
 
-        // ၆။ Tabs Interaction
+        // ၇။ Dialect Selector & Nav Interaction
         document.querySelectorAll('.dialect-btn, .nav-item').forEach(el => {
             el.addEventListener('click', function() {
                 hapticFeedback();
@@ -302,6 +380,20 @@
                 this.classList.add('active');
             });
         });
+
+        // ၈။ Audio & Mic Interaction
+        const micBtn = document.querySelector('.btn-mic');
+        if(micBtn) {
+            micBtn.addEventListener('click', () => {
+                hapticFeedback();
+                micBtn.style.transform = "scale(0.9)";
+                micBtn.style.background = "#ff4444";
+                setTimeout(() => {
+                    micBtn.style.transform = "scale(1)";
+                    micBtn.style.background = "var(--maroon)";
+                }, 1000);
+            });
+        }
     </script>
 </body>
 </html>
